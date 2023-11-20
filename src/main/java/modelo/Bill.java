@@ -15,6 +15,23 @@ public class Bill {
 	
 	
 	
+	public Bill(int date_bill, String observation, double value ) {
+		super();
+		this.date_bill = date_bill;
+		this.value = value;
+		this.observation = observation;
+	}
+
+	public Bill(int id, int date_bill, int user_id, double value, int type, String observation) {
+		super();
+		this.id = id;
+		this.date_bill = date_bill;
+		this.user_id = user_id;
+		this.value = value;
+		this.type = type;
+		this.observation = observation;
+	}
+	
 	public int getId() {
 		return id;
 	}

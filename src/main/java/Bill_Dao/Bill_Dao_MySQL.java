@@ -6,11 +6,10 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import modelo.Usuario;
 import modelo.Bill;
 import util.ConexionMySQL;
 
-public class Bill_Dao_MySQL implements Bill_Dao {
+public class Bill_Dao_MySQL implements Bill_Dao{
 	private ConexionMySQL conexion;
 	private static final String INSERT_BILL_SQL = "INSERT INTO bill(id,date_bill,user_id,value,type,observation) VALUE(?,?,?,?,?,?);";
 	private static final String DELETE_BILL_SQL = "DELETE FROM bill WHERE id = ?;";
@@ -52,21 +51,21 @@ public class Bill_Dao_MySQL implements Bill_Dao {
 		
 	}
 	
-	public void update (Usuario usuario) throws SQLException  {
+	public void update (Bill bill) throws SQLException  {
 		try {
 			PreparedStatement preparedStatement = (PreparedStatement)conexion.setPreparedStatement(UPDATE_BILL_SQL);
-			preparedStatement.setString(1, usuario.getNombre());
-			preparedStatement.setString(2, usuario.getEmail());
-			preparedStatement.setString(3, usuario.getPais());
-			preparedStatement.setInt(4,usuario.getId());			
+			preparedStatement.setString(1, bill.getObservation());
+			/*preparedStatement.setString(2, bill.getEmail());
+			preparedStatement.setString(3, bill.getPais());
+			preparedStatement.setInt(4,bill.getId());*/			
 			conexion.execute();
 		}catch(SQLException e) {
 			
 		}
 	}
 	
-	public List<Usuario> selectAll() {
-		List<Usuario> usuarios = new ArrayList<>();
+	public List<Bill> selectAll() {
+		List<Bill>bill = new ArrayList<>();
 		
 		try {
 			PreparedStatement preparedStatement = (PreparedStatement)conexion.setPreparedStatement(SELECT_ALL_BILL);
@@ -74,22 +73,25 @@ public class Bill_Dao_MySQL implements Bill_Dao {
 			ResultSet rs = conexion.query();
 			while(rs.next()) {
 				int id = rs.getInt("id");
-				String nombre = rs.getString("nombre");
-				String email = rs.getString("email");
+				int date_bill = rs.getInt("date_bill");
+				int user_id = rs.getInt("user_id");
+				double value = rs.getDouble("value");
 				String pais = rs.getString("pais");
-				usuarios.add(new Usuario(id,nombre,email,pais));
+				int type = rs.getInt("type");
+				String observation = rs.getString("observation");
+				
+				bill.add(new Bill(date_bill,observation,value));
 			}
 			
 		}catch(SQLException e) {
 			
 		}
-		return usuarios;
-		
+		return bill;
 	}
 	
 	
-	public Usuario select(int id) {
-		Usuario usuario=null;
+	public Bill select(int id) {
+		Bill bill=null;
 		
 		try {
 			PreparedStatement preparedStatement = (PreparedStatement)conexion.setPreparedStatement(SELECT_BILL_BY_ID);
@@ -97,25 +99,20 @@ public class Bill_Dao_MySQL implements Bill_Dao {
 			
 			ResultSet rs = conexion.query();
 			while(rs.next()) {
+				int date_bill = rs.getInt("date_bill");
+				String observation = rs.getString("observation");
+				double value = rs.getDouble("value");
 				
-				String nombre = rs.getString("nombre");
-				String email = rs.getString("email");
-				String pais = rs.getString("pais");
-				usuario  = new Usuario(id,nombre,email,pais);
+				bill  = new Bill(date_bill,observation,value);
 			}
 			
 		}catch(SQLException e) {
 			
 		}
-		return usuario;
+		return bill;
 		
 	}
-
-	@Override
-	public void insert(Usuario usuario) throws SQLException {
-		// TODO Auto-generated method stub
-		
-	}
+	
 	
 	
 	
