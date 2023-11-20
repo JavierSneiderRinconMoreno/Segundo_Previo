@@ -1,6 +1,6 @@
 package modelo;
 
-public class bill {
+public class Bill {
 	
 	private  int id; 	
 	private  int date_bill; 	
