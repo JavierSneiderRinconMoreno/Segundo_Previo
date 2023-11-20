@@ -10,11 +10,6 @@ public class Bill {
 	private  String observation;
 	
 	
-	
-	
-	
-	
-	
 	public Bill(int date_bill, String observation, double value ) {
 		super();
 		this.date_bill = date_bill;
@@ -32,6 +27,10 @@ public class Bill {
 		this.observation = observation;
 	}
 	
+	public Bill() {
+		// TODO Auto-generated constructor stub
+	}
+
 	public int getId() {
 		return id;
 	}

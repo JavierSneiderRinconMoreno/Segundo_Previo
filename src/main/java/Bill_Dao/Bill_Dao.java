@@ -11,5 +11,5 @@ public interface Bill_Dao {
 		public Bill select (int id);
 		public List < Bill > selectAll();
 		public void delete(int id) throws SQLException;
-		public void update(Bill bill) throws SQLException;
+		/*public void update(Bill bill) throws SQLException;*/
 }

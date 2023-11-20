@@ -13,7 +13,7 @@ public class Bill_Dao_MySQL implements Bill_Dao{
 	private ConexionMySQL conexion;
 	private static final String INSERT_BILL_SQL = "INSERT INTO bill(id,date_bill,user_id,value,type,observation) VALUE(?,?,?,?,?,?);";
 	private static final String DELETE_BILL_SQL = "DELETE FROM bill WHERE id = ?;";
-	private static final String UPDATE_BILL_SQL = "UPDATE bill SET id=?, date_bill=?,	user_id=?, 	value=?, type=?, observation=?, WHERE id =?;";
+	/*private static final String UPDATE_BILL_SQL = "UPDATE bill SET id=?, date_bill=?,	user_id=?, 	value=?, type=?, observation=?, WHERE id =?;";*/
 	private static final String SELECT_BILL_BY_ID = "SELECT * FROM bill WHERE id=?;";
 	private static final String SELECT_ALL_BILL = "SELECT * FROM bill; ";
 	
@@ -50,19 +50,21 @@ public class Bill_Dao_MySQL implements Bill_Dao{
 		}
 		
 	}
-	
+	/*
 	public void update (Bill bill) throws SQLException  {
 		try {
 			PreparedStatement preparedStatement = (PreparedStatement)conexion.setPreparedStatement(UPDATE_BILL_SQL);
 			preparedStatement.setString(1, bill.getObservation());
 			/*preparedStatement.setString(2, bill.getEmail());
 			preparedStatement.setString(3, bill.getPais());
-			preparedStatement.setInt(4,bill.getId());*/			
+			preparedStatement.setInt(4,bill.getId());	
 			conexion.execute();
 		}catch(SQLException e) {
 			
 		}
 	}
+	
+	*/
 	
 	public List<Bill> selectAll() {
 		List<Bill>bill = new ArrayList<>();
